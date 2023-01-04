@@ -32,8 +32,8 @@ router.get('/phonebooks', async function (req, res, next) {
                 order: [
                     ['id', 'ASC']
                 ],
-                limit: limit,
-                offset: offset
+                // limit: limit,
+                // offset: offset
             })
 
             const totalPage = Math.ceil(count / limit);
@@ -57,8 +57,8 @@ router.get('/phonebooks', async function (req, res, next) {
                 order: [
                     ['id', 'ASC']
                 ],
-                limit: limit,
-                offset: offset
+                // limit: limit,
+                // offset: offset
             })
 
             const totalPage = Math.ceil(count / limit);
@@ -81,8 +81,8 @@ router.get('/phonebooks', async function (req, res, next) {
                 order: [
                     ['id', 'ASC']
                 ],
-                limit: limit,
-                offset: offset
+                // limit: limit,
+                // offset: offset
             })
 
             const totalPage = Math.ceil(count / limit);
@@ -96,8 +96,8 @@ router.get('/phonebooks', async function (req, res, next) {
                 order: [
                     ['id', 'ASC']
                 ],
-                limit: limit,
-                offset: offset
+                // limit: limit,
+                // offset: offset
             })
 
             const totalPage = Math.ceil(count / limit);
