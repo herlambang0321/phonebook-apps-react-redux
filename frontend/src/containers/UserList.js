@@ -32,7 +32,7 @@ class UserList extends Component {
                         {this.props.users.map((user, index) => {
                             return (
                                 <UserItem
-                                    key={user.id}
+                                    key={index}
                                     no={index + 1}
                                     user={user}
                                     update={(name, phone) => this.props.update(user.id, name, phone)}

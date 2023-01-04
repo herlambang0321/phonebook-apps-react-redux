@@ -26,7 +26,7 @@ class UserForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        this.props.add(this.state.name, this.state.phone )
+        this.props.add(this.state.name, this.state.phone)
         this.setState({ name: '', phone: '' })
     }
 

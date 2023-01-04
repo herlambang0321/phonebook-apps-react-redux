@@ -1,9 +1,9 @@
 // import axios from 'axios'
+import React, { Component } from "react";
 import UserForm from "../containers/UserForm";
 import UserList from "../containers/UserList";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import React, { Component } from "react";
 
 // const request = axios.create({
 //     baseURL: 'http://localhost:3000/api',

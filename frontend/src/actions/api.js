@@ -2,9 +2,8 @@ export const loadUser = () => ({
     type: 'LOAD_USER'
 })
 
-export const addUser = (id, name, phone) => ({
+export const addUser = (name, phone) => ({
     type: 'ADD_USER',
-    id,
     name,
     phone
 })
