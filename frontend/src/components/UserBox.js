@@ -156,11 +156,8 @@ export default class UserBox extends Component {
                         <h1>Phone Book Apps</h1>
                     </div>
                 </div>
-                <div className="mt-3">
-                    <button type="submit" className="btn btn-primary" onClick={() => this.showAddUser()}><FontAwesomeIcon icon={faPlus} /> add</button>
-                </div>
                 <div className="card-body mt-3">
-                    {this.state.showAdd ? <UserForm cancel={this.hiddenAddUser} /> : null}
+                    {this.state.showAdd ? <UserForm cancel={this.hiddenAddUser} /> : <button type="submit" className="btn btn-primary" onClick={() => this.showAddUser()}><FontAwesomeIcon icon={faPlus} /> add</button>}
                 </div>
                 <div className="card-body mt-3">
                     <UserForm

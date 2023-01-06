@@ -6,12 +6,12 @@ const request = axios.create({
     headers: { 'X-Custom-Header': 'foobar' }
 });
 
-export const loadUserSuccess = (data) => ({
+const loadUserSuccess = (users) => ({
     type: 'LOAD_USER_SUCCESS',
-    data
+    users
 })
 
-export const loadUserFailure = () => ({
+const loadUserFailure = () => ({
     type: 'LOAD_USER_FAILURE'
 })
 
@@ -26,8 +26,29 @@ export const loadUser = () => {
     }
 }
 
-export const addUser = (name, phone) => ({
+export const addUserSuccess = (user) => ({
+    type: 'ADD_USER_SUCCESS',
+    user
+})
+
+export const addUserFailure = () => ({
+    type: 'ADD_USER_FAILURE'
+})
+
+export const addUserRedux = (name, phone) => ({
     type: 'ADD_USER',
     name,
     phone
 })
+
+export const addUser = (name, phone) => {
+    return async (dispatch) => {
+        dispatch(addUserRedux(name, phone))
+        try {
+            const { data } = await request.post('/phonebooks', { name, phone });
+            dispatch(addUserSuccess(data.data.rows))
+        } catch (err) {
+            dispatch(addUserFailure(err))
+        }
+    }
+}

@@ -1,7 +1,7 @@
 const users = (state = [], action) => {
     switch (action.type) {
         case 'LOAD_USER_SUCCESS':
-            return action.data.map(item => ({
+            return action.users.map(item => ({
                 id: item.id,
                 name: item.name,
                 phone: item.phone,

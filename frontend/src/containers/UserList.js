@@ -12,7 +12,7 @@ class UserList extends Component {
     scrolled = (event) => {
         var element = event.target;
         if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-            this.props.loadMorePage()
+            // this.props.loadMorePage()
         }
     }
 
@@ -32,7 +32,7 @@ class UserList extends Component {
                         {this.props.users.map((user, index) => {
                             return (
                                 <UserItem
-                                    key={index}
+                                    key={user.id}
                                     no={index + 1}
                                     user={user}
                                     update={(name, phone) => this.props.update(user.id, name, phone)}
