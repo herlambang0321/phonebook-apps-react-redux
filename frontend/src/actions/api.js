@@ -26,12 +26,12 @@ export const loadUser = () => {
     }
 }
 
-export const addUserSuccess = (user) => ({
+const addUserSuccess = (user) => ({
     type: 'ADD_USER_SUCCESS',
     user
 })
 
-export const addUserFailure = () => ({
+const addUserFailure = () => ({
     type: 'ADD_USER_FAILURE'
 })
 
@@ -49,6 +49,26 @@ export const addUser = (name, phone) => {
             dispatch(addUserSuccess(data.data.rows))
         } catch (err) {
             dispatch(addUserFailure(err))
+        }
+    }
+}
+
+const removeUserSuccess = (id) => ({
+    type: 'REMOVE_USER_SUCCESS',
+    id
+})
+
+const removeUserFailure = () => ({
+    type: 'REMOVE_USER_FAILURE'
+})
+
+export const removeUser = (id) => {
+    return async (dispatch) => {
+        try {
+            await request.delete(`/phonebooks/${id}`);
+            dispatch(removeUserSuccess(id))
+        } catch (err) {
+            dispatch(removeUserFailure(err))
         }
     }
 }

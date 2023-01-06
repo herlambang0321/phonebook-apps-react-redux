@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { loadUser } from "../actions/api";
+import { loadUser, removeUser } from "../actions/api";
 import UserItem from "../components/UserItem"
 import { connect } from 'react-redux'
 
@@ -53,7 +53,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    load: () => dispatch(loadUser())
+    load: () => dispatch(loadUser()),
+    remove: (id) => dispatch(removeUser(id))
 })
 
 export default connect(
