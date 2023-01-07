@@ -35,6 +35,7 @@ class UserList extends Component {
                                     key={user.id}
                                     no={index + 1}
                                     user={user}
+                                    sent={user.sent}
                                     update={(name, phone) => this.props.update(user.id, name, phone)}
                                     remove={() => this.props.remove(user.id)}
                                     resend={() => this.props.resend(user.id, user.name, user.phone)}

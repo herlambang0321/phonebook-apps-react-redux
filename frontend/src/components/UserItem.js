@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil, faTrashCan, faRepeat, faFloppyDisk, faBan } from '@fortawesome/free-solid-svg-icons'
+import { faCircleCheck } from '@fortawesome/free-regular-svg-icons'
+import { faPencil, faTrashCan, faRepeat, faBan } from '@fortawesome/free-solid-svg-icons'
 
 export default class UserItem extends Component {
 
@@ -63,7 +64,7 @@ export default class UserItem extends Component {
                 {this.props.user.sent ?
                     this.state.isEdit ?
                         <td>
-                            <button type="button" className="btn btn-primary mx-1" onClick={this.saveEdit}><FontAwesomeIcon icon={faFloppyDisk} /> save</button>
+                            <button type="button" className="btn btn-primary mx-1" onClick={this.saveEdit}><FontAwesomeIcon icon={faCircleCheck} /> save</button>
                             <button className='btn btn-warning' type='button' onClick={this.handleCancel}><FontAwesomeIcon icon={faBan} style={{ transform: 'rotate(90deg' }} /> cancel</button>
                         </td>
                         :

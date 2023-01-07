@@ -26,29 +26,33 @@ export const loadUser = () => {
     }
 }
 
-const addUserSuccess = (user) => ({
+export const addUserSuccess = (id, user) => ({
     type: 'ADD_USER_SUCCESS',
+    id,
     user
 })
 
-const addUserFailure = () => ({
-    type: 'ADD_USER_FAILURE'
+export const addUserFailure = (id) => ({
+    type: 'ADD_USER_FAILURE',
+    id
 })
 
-export const addUserRedux = (name, phone) => ({
+export const addUserRedux = (id, name, phone) => ({
     type: 'ADD_USER',
+    id,
     name,
     phone
 })
 
 export const addUser = (name, phone) => {
+    const id = Date.now()
     return async (dispatch) => {
-        dispatch(addUserRedux(name, phone))
+        dispatch(addUserRedux(id, name, phone))
         try {
             const { data } = await request.post('/phonebooks', { name, phone });
-            dispatch(addUserSuccess(data.data.rows))
+            dispatch(addUserSuccess(id, data.data.rows))
         } catch (err) {
-            dispatch(addUserFailure(err))
+            dispatch(addUserFailure(id))
         }
     }
 }

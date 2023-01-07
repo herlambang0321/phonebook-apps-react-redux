@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBan, faCircleCheck, faMagnifyingGlass, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
+import { faCircleCheck } from '@fortawesome/free-regular-svg-icons'
+import { faBan, faMagnifyingGlass, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { addUser } from "../actions/api";
 import { connect } from 'react-redux'
 
