@@ -61,7 +61,7 @@ export default class UserItem extends Component {
                         this.state.phone
                     }
                 </td>
-                {this.props.user.sent ?
+                {this.props.sent ?
                     this.state.isEdit ?
                         <td>
                             <button type="button" className="btn btn-primary mx-1" onClick={this.saveEdit}><FontAwesomeIcon icon={faCircleCheck} /> save</button>

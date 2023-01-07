@@ -6,9 +6,11 @@ const request = axios.create({
     headers: { 'X-Custom-Header': 'foobar' }
 });
 
-const loadUserSuccess = (users) => ({
+const loadUserSuccess = (users, page, totalPage) => ({
     type: 'LOAD_USER_SUCCESS',
-    users
+    users,
+    page,
+    totalPage
 })
 
 const loadUserFailure = () => ({
@@ -19,7 +21,7 @@ export const loadUser = () => {
     return async (dispatch) => {
         try {
             const { data } = await request.get('/phonebooks');
-            dispatch(loadUserSuccess(data.data.rows))
+            dispatch(loadUserSuccess(data.data.rows, data.data.page, data.data.totalPage))
         } catch (err) {
             dispatch(loadUserFailure(err))
         }
@@ -50,7 +52,7 @@ export const addUser = (name, phone) => {
         dispatch(addUserRedux(id, name, phone))
         try {
             const { data } = await request.post('/phonebooks', { name, phone });
-            dispatch(addUserSuccess(id, data.data.rows))
+            dispatch(addUserSuccess(id, data.data))
         } catch (err) {
             dispatch(addUserFailure(id))
         }
@@ -73,6 +75,27 @@ export const removeUser = (id) => {
             dispatch(removeUserSuccess(id))
         } catch (err) {
             dispatch(removeUserFailure(err))
+        }
+    }
+}
+
+const resendUserSuccess = (id, user) => ({
+    type: 'RESEND_USER_SUCCESS',
+    id,
+    user
+})
+
+const resendUserFailure = () => ({
+    type: 'RESEND_USER_FAILURE'
+})
+
+export const resendUser = (id, name, phone) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await request.post('/phonebooks', { name, phone });
+            dispatch(resendUserSuccess(id, data.data))
+        } catch (err) {
+            dispatch(resendUserFailure(err))
         }
     }
 }

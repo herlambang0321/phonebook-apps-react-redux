@@ -1,13 +1,10 @@
 const users = (state = [], action) => {
     switch (action.type) {
         case 'LOAD_USER_SUCCESS':
-            return action.users.map(item => ({
-                id: item.id,
-                name: item.name,
-                phone: item.phone,
-                sent: true
-
-            }))
+            return [...(action.page === 1 ? [] : state), ...action.users.map(item => {
+                item.sent = true
+                return item
+            })]
         case 'ADD_USER':
             return [
                 ...state,
@@ -19,7 +16,7 @@ const users = (state = [], action) => {
                 }
             ]
         case 'ADD_USER_SUCCESS':
-            return action.users.map(item => {
+            return state.map(item => {
                 if (item.id === action.id) {
                     return {
                         id: action.user.id,
@@ -31,15 +28,28 @@ const users = (state = [], action) => {
                 return item
             })
         case 'ADD_USER_FAILURE':
-            return action.users.map(item => {
+            return state.map(item => {
                 if (item.id === action.id) {
-                    item.sent = false
+                    return { ...item, sent: false }
+                }
+                return item
+            })
+        case 'RESEND_USER_SUCCESS':
+            return state.map(item => {
+                if (item.id === action.id) {
+                    return {
+                        id: action.user.id,
+                        name: action.user.name,
+                        phone: action.user.phone,
+                        sent: true
+                    }
                 }
                 return item
             })
         case 'REMOVE_USER_SUCCESS':
             return state.filter(item => item.id !== action.id)
         case 'REMOVE_USER_FAILURE':
+        case 'RESEND_USER_FAILURE':
         case 'LOAD_USER_FAILURE':
         default:
             return state
