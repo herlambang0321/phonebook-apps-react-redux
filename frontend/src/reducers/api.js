@@ -34,6 +34,18 @@ const users = (state = [], action) => {
                 }
                 return item
             })
+        case 'UPDATE_USER_SUCCESS':
+            return state.map(item => {
+                if (item.id === action.id) {
+                    return {
+                        id: action.user.id,
+                        name: action.user.name,
+                        phone: action.user.phone,
+                        sent: true
+                    }
+                }
+                return item
+            })
         case 'RESEND_USER_SUCCESS':
             return state.map(item => {
                 if (item.id === action.id) {
@@ -49,6 +61,7 @@ const users = (state = [], action) => {
         case 'REMOVE_USER_SUCCESS':
             return state.filter(item => item.id !== action.id)
         case 'REMOVE_USER_FAILURE':
+        case 'UPDATE_CONTACT_FAILURE':
         case 'RESEND_USER_FAILURE':
         case 'LOAD_USER_FAILURE':
         default:

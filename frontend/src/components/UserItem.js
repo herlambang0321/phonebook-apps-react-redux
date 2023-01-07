@@ -65,7 +65,7 @@ export default class UserItem extends Component {
                     this.state.isEdit ?
                         <td>
                             <button type="button" className="btn btn-primary mx-1" onClick={this.saveEdit}><FontAwesomeIcon icon={faCircleCheck} /> save</button>
-                            <button className='btn btn-warning' type='button' onClick={this.handleCancel}><FontAwesomeIcon icon={faBan} style={{ transform: 'rotate(90deg' }} /> cancel</button>
+                            <button className='btn btn-warning text-white' type='button' onClick={this.handleCancel}><FontAwesomeIcon icon={faBan} style={{ transform: 'rotate(90deg' }} /> cancel</button>
                         </td>
                         :
                         <td>

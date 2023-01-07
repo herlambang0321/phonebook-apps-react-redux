@@ -59,6 +59,27 @@ export const addUser = (name, phone) => {
     }
 }
 
+const updateUserSuccess = (id, user) => ({
+    type: 'UPDATE_USER_SUCCESS',
+    id,
+    user
+})
+
+const updateUserFailure = () => ({
+    type: 'UPDATE_USER_FAILURE'
+})
+
+export const updateUser = (id, name, phone) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await request.put(`/phonebooks/${id}`, { name, phone });
+            dispatch(updateUserSuccess(id, data.data))
+        } catch (err) {
+            dispatch(updateUserFailure(id))
+        }
+    }
+}
+
 const removeUserSuccess = (id) => ({
     type: 'REMOVE_USER_SUCCESS',
     id
