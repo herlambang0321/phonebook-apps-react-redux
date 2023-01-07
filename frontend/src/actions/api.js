@@ -28,18 +28,18 @@ export const loadUser = () => {
     }
 }
 
-export const addUserSuccess = (id, user) => ({
+const addUserSuccess = (id, user) => ({
     type: 'ADD_USER_SUCCESS',
     id,
     user
 })
 
-export const addUserFailure = (id) => ({
+const addUserFailure = (id) => ({
     type: 'ADD_USER_FAILURE',
     id
 })
 
-export const addUserRedux = (id, name, phone) => ({
+const addUserRedux = (id, name, phone) => ({
     type: 'ADD_USER',
     id,
     name,
