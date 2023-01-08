@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { loadUser, removeUser, resendUser, updateUser } from "../actions/api";
+import { loadUser, removeUser, resendUser, updateUser, loadmoreUser } from "../actions/api";
 import UserItem from "../components/UserItem"
 import { connect } from 'react-redux'
 
@@ -12,7 +12,7 @@ class UserList extends Component {
     scrolled = (event) => {
         var element = event.target;
         if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-            // this.props.loadMorePage()
+            this.props.loadmore()
         }
     }
 
@@ -49,15 +49,16 @@ class UserList extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-    users: state.users
+const mapStateToProps = (state) => ({
+    users: state.users.data
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
     load: () => dispatch(loadUser()),
     remove: (id) => dispatch(removeUser(id)),
     resend: (id, name, phone) => dispatch(resendUser(id, name, phone)),
-    update: (id, name, phone) => dispatch(updateUser(id, name, phone))
+    update: (id, name, phone) => dispatch(updateUser(id, name, phone)),
+    loadmore: (id, name, phone) => dispatch(loadmoreUser(id, name, phone))
 })
 
 export default connect(

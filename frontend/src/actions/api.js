@@ -18,12 +18,73 @@ const loadUserFailure = () => ({
 })
 
 export const loadUser = () => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         try {
-            const { data } = await request.get('/phonebooks');
+            const { data } = await request.get('/phonebooks', { params: getState().users.params })
             dispatch(loadUserSuccess(data.data.rows, data.data.page, data.data.totalPage))
         } catch (err) {
             dispatch(loadUserFailure(err))
+        }
+    }
+}
+
+const loadmoreUserSuccess = (user) => ({
+    type: 'LOADMORE_USER_SUCCESS',
+    user
+})
+
+const loadmoreUserFailure = () => ({
+    type: 'LOADMORE_USER_FAILURE'
+})
+
+export const loadmoreUser = () => {
+    return async (dispatch, getState) => {
+        try {
+            let state = getState()
+            if (state.users.params.page < state.users.params.totalPage) {
+                let params = {
+                    ...state.users.params,
+                    page: state.users.params.page + 1
+                }
+                const { data } = await request.get('/phonebooks', { params });
+                params = {
+                    ...params,
+                    totalPage: data.data.totalPage
+                }
+                dispatch(loadmoreUserSuccess({ value: data.data.rows, params }))
+            }
+        } catch (err) {
+            dispatch(loadmoreUserFailure(err))
+        }
+    }
+}
+
+const searchUserSuccess = (user) => ({
+    type: 'SEARCH_USER_SUCCESS',
+    user
+})
+
+const searchUserFailure = () => ({
+    type: 'SEARCH_USER_FAILURE'
+})
+
+export const searchUser = (query) => {
+    return async (dispatch, getState) => {
+        let state = getState()
+        let params = {
+            ...state.users.params,
+            ...query,
+            page: 1
+        }
+        try {
+            const { data } = await request.get('/phonebooks', { params })
+            params = {
+                ...params,
+                totalPage: data.data.totalPage
+            }
+            dispatch(searchUserSuccess({ value: data.data.rows, params }))
+        } catch (err) {
+            dispatch(searchUserFailure())
         }
     }
 }
@@ -49,7 +110,9 @@ const addUserRedux = (id, name, phone) => ({
 export const addUser = (name, phone) => {
     const id = Date.now()
     return async (dispatch) => {
-        dispatch(addUserRedux(id, name, phone))
+        if (!dispatch(searchUser())) {
+            dispatch(addUserRedux(id, name, phone))
+        }
         try {
             const { data } = await request.post('/phonebooks', { name, phone });
             dispatch(addUserSuccess(id, data.data))

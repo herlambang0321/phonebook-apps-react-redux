@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons'
 import { faBan, faMagnifyingGlass, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
-import { addUser } from "../actions/api";
+import { addUser, searchUser } from "../actions/api";
 import { connect } from 'react-redux'
 
 class UserForm extends Component {
@@ -81,8 +81,9 @@ class UserForm extends Component {
 
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    add: (name, phone) => dispatch(addUser(name, phone))
+const mapDispatchToProps = (dispatch) => ({
+    add: (name, phone) => dispatch(addUser(name, phone)),
+    search: (query) => dispatch(searchUser(query))
 })
 
 export default connect(
