@@ -10,7 +10,7 @@ router.get('/phonebooks', async function (req, res, next) {
         const { name, phone } = req.query
 
         const page = parseInt(req.query.page) || 1;
-        const limit = 3;
+        const limit = 5;
         const offset = (page - 1) * limit;
 
         if (name && phone) {
